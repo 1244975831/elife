@@ -1,0 +1,18 @@
+.material {
+    color:black;
+}
+.grass {
+    background-image: url(../../../image/material/grassm.png);
+   
+}
+.wall {
+    background-image: url(../../../image/material/wall.png);
+   
+}
+.sleep {
+    background-image: url(../../../image/material/sleep.png);
+    
+}
+.air {
+    background-color:rgba(0, 0,0,0);
+}
