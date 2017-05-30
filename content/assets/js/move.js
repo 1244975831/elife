@@ -8,8 +8,30 @@ var animal = {
             for(var j = 0 ;j<td.length;j++){
                 var history_income_type = td.eq(j).attr("class");
                 if(history_income_type =="material sleep"){
-                    td.eq(j).removeClass("material sleep" ).addClass("material air");
-                    td.eq(j-1).removeClass("material air" ).addClass("material sleep");
+                    var type = Math.random()*4+1;
+                    alert(type>0);
+                    if(0<type&&type<=1){
+                        alert(1);
+                        td.eq(j).removeClass("material sleep" ).addClass("material air");
+                        td.eq(j-1).removeClass("material air" ).addClass("material sleep");
+                    }
+                    else if(1<type&&type<=2){
+                         alert(2);
+                        td.eq(j).removeClass("material sleep" ).addClass("material air");
+                        td.eq(j+1).removeClass("material air" ).addClass("material sleep");
+                    }
+                    else if(2<type&&type<=3){
+                         alert(3);
+                        var td2 = tr.eq(i-1).find("td");
+                        td.eq(j).removeClass("material sleep" ).addClass("material air");
+                        td2.eq(j).removeClass("material air" ).addClass("material sleep");
+                    }
+                    else if(3<type&&type<=4 ){
+                         alert(4);
+                        var td2 = tr.eq(i+1).find("td");
+                        td.eq(j).removeClass("material sleep" ).addClass("material air");
+                        td2.eq(j).removeClass("material air" ).addClass("material sleep");
+                    }
                 }
             }
         }
