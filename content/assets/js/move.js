@@ -1,7 +1,7 @@
 var animal = {
     data : data_map["forest"],
     size : 0,
-
+    maxenergy:160,
     find:function(){
         var table = document.querySelector("#map");
         var tr = $("#map").children("tr")
@@ -138,6 +138,17 @@ var animal = {
                 if(history_income_type =="material hunter"){
                     var td2 = tr.eq(i-1).find("td");
                     var td3 = tr.eq(i+1).find("td");
+
+                    if(td.eq(j).attr("title")==0){
+                        td.eq(j).removeClass("material hunter").addClass("material air");
+                        td.eq(j).attr("title",0);
+                    }else if(td.eq(j).attr("title")>=animal.maxenergy){
+                        if(td.eq(j+1).attr("class")=="material air"){
+                            td.eq(j+1).removeClass("material air").addClass("material hunter");
+                            td.eq(j).attr("title",60);td.eq(j+1).attr("title",60);
+                        }
+                    }
+
                    if(td.eq(j-1).attr("class" )=="material sleep"){
                         td.eq(j).removeClass("material hunter" ).addClass("material air");
                         td.eq(j-1).removeClass("material sleep" ).addClass("material hunter");
@@ -208,12 +219,12 @@ var animal = {
                         td2.eq(j).removeClass("material grass" ).addClass("material hunter");
                         td2.eq(j).attr("title",parseInt(td.eq(j).attr("title"))-1);
                         td.eq(j).attr("title",0);
-                   }else if(td3.eq(j-1).attr("class" )=="material grass"&&td2.eq(j).attr("class" )=="material air"){
+                   }else if(td3.eq(j-1).attr("class" )=="material grass"&&td3.eq(j).attr("class" )=="material air"){
                         td.eq(j).removeClass("material hunter" ).addClass("material air");
                         td3.eq(j).removeClass("material grass" ).addClass("material hunter");
                         td3.eq(j).attr("title",parseInt(td.eq(j).attr("title"))-1);
                         td.eq(j).attr("title",0);
-                   }else if(td3.eq(j+1).attr("class" )=="material grass"&&td2.eq(j).attr("class" )=="material air"){
+                   }else if(td3.eq(j+1).attr("class" )=="material grass"&&td3.eq(j).attr("class" )=="material air"){
                         td.eq(j).removeClass("material hunter" ).addClass("material air");
                         td3.eq(j).removeClass("material grass" ).addClass("material hunter");
                         td3.eq(j).attr("title",parseInt(td.eq(j).attr("title"))-1);
@@ -263,7 +274,7 @@ var animal = {
                    }
                        
                 }
-                 if(history_income_type =="air material hunter"){
+                if(history_income_type =="air material hunter"){
                      td.eq(j).removeClass("air material hunter" ).addClass(" material hunter");
                 }
             }
@@ -271,14 +282,11 @@ var animal = {
         setTimeout("animal.find()", 500);
         
     },
-    move:function(i,j){
+    sleepaction:function(i,j){
         var tr = $("#map").children("tr")
         var td = tr.eq(i).find("td");
         td.eq(j).removeClass("material sleep" ).addClass("material air");
         td.eq(j-1).removeClass("material air" ).addClass("material sleep");
     }
     
-}
-var sleep = {
-    energy : 20,
 }
