@@ -16,7 +16,8 @@ var animal = {
         
                         if( td.eq(j-1).attr("class" )=="material air"){
                             if( td.eq(j).attr("title")==0){
-                                td.eq(j).removeClass("material sleep" ).addClass("material air");
+                                td.eq(j).removeClass("material sleep" ).addClass("material deadsleep");
+                                td.eq(j).attr("title",5);
                             }else if(td.eq(j).attr("title")>=60){
                                 if(td.eq(j+1).attr("class")=="material air"){
                                     td.eq(j+1).removeClass("material air" ).addClass("material sleep");
@@ -41,7 +42,8 @@ var animal = {
                     else if(1<type&&type<=2){
                         if( td.eq(j+1).attr("class" )=="material air"){
                             if( td.eq(j).attr("title")==0){
-                                td.eq(j).removeClass("material sleep" ).addClass("material air");
+                                td.eq(j).removeClass("material sleep" ).addClass("material deadsleep");
+                                td.eq(j).attr("title",5);
                             }else if(td.eq(j).attr("title")>=60){
                                 if(td.eq(j+1).attr("class")=="material air"){
                                     td.eq(j+1).removeClass("material air" ).addClass("material sleep");
@@ -59,12 +61,14 @@ var animal = {
                             td.eq(j+1).attr("title",parseInt(td.eq(j).attr("title"))+15);
                             td.eq(j).attr("title",0);
                         }
+                        j++;
                     }
                     else if(2<type&&type<=3){
                         var td2 = tr.eq(i-1).find("td");
                         if(td2.eq(j).attr("class" )=="material air"){
                              if( td.eq(j).attr("title")==0){
-                                td.eq(j).removeClass("material sleep" ).addClass("material air");
+                                td.eq(j).removeClass("material sleep" ).addClass("material deadsleep");
+                                td.eq(j).attr("title",5);
                             }else if(td.eq(j).attr("title")>=60){
                                 if(td.eq(j+1).attr("class")=="material air"){
                                     td.eq(j+1).removeClass("material air" ).addClass("material sleep");
@@ -88,7 +92,8 @@ var animal = {
                         var td2 = tr.eq(i+1).find("td");
                         if(td2.eq(j).attr("class" )=="material air"){
                             if( td.eq(j).attr("title")==0){
-                                td.eq(j).removeClass("material sleep" ).addClass("material air");
+                                td.eq(j).removeClass("material sleep" ).addClass("material deadsleep");
+                                td.eq(j).attr("title",5);
                             }else if(td.eq(j).attr("title")>=80){
                                if(td.eq(j+1).attr("class")=="material air"){
                                     td.eq(j+1).removeClass("material air" ).addClass("material sleep");
@@ -96,14 +101,14 @@ var animal = {
                                 }
                             }else{
                                 td.eq(j).removeClass("material sleep" ).addClass("material air");
-                                td2.eq(j).removeClass("material air" ).addClass("material sleep");
+                                td2.eq(j).removeClass("material air" ).addClass("material movedsleep");
                                 td2.eq(j).attr("title",td.eq(j).attr("title")-1);
                                 td.eq(j).attr("title",0);
                             }
                         }
                         else if(td2.eq(j).attr("class" )=="material grass"){
                             td.eq(j).removeClass("material sleep" ).addClass("material air");
-                            td2.eq(j).removeClass("material grass" ).addClass("material sleep");
+                            td2.eq(j).removeClass("material grass" ).addClass("material movedsleep");
                             td2.eq(j).attr("title",parseInt(td.eq(j).attr("title"))+15);
                             td.eq(j).attr("title",0);
                         }
@@ -149,7 +154,27 @@ var animal = {
                         }
                     }
 
-                   if(td.eq(j-1).attr("class" )=="material sleep"){
+                    if(td.eq(j-1).attr("class" )=="material deadsleep"){
+                        td.eq(j).removeClass("material hunter" ).addClass("material air");
+                        td.eq(j-1).removeClass("material deadsleep" ).addClass("material hunter");
+                        td.eq(j-1).attr("title",parseInt(td.eq(j).attr("title"))+20);
+                        td.eq(j).attr("title",0);
+                   }else if(td.eq(j+1).attr("class" )=="material deadsleep"){
+                        td.eq(j).removeClass("material hunter" ).addClass("material air");
+                        td.eq(j+1).removeClass("material deadsleep" ).addClass("material hunter");
+                        td.eq(j+1).attr("title",parseInt(td.eq(j).attr("title"))+30);
+                        td.eq(j).attr("title",0);
+                   }else if(td2.eq(j).attr("class")=="material deadsleep"){
+                        td.eq(j).removeClass("material hunter" ).addClass("material air");
+                        td2.eq(j).removeClass("material deadsleep" ).addClass("material hunter");
+                        td2.eq(j).attr("title",parseInt(td.eq(j).attr("title"))+30);
+                        td.eq(j).attr("title",0);
+                   }else if(td3.eq(j).attr("class")=="material deadsleep"){
+                        td.eq(j).removeClass("material hunter" ).addClass("material air");
+                        td3.eq(j).removeClass("material deadsleep" ).addClass("material movedhunter");
+                        td3.eq(j).attr("title",parseInt(td.eq(j).attr("title"))+30);
+                        td.eq(j).attr("title",0);
+                   }else if(td.eq(j-1).attr("class" )=="material sleep"){
                         td.eq(j).removeClass("material hunter" ).addClass("material air");
                         td.eq(j-1).removeClass("material sleep" ).addClass("material hunter");
                         td.eq(j-1).attr("title",parseInt(td.eq(j).attr("title"))+30);
@@ -166,7 +191,7 @@ var animal = {
                         td.eq(j).attr("title",0);
                    }else if(td3.eq(j).attr("class")=="material sleep"){
                         td.eq(j).removeClass("material hunter" ).addClass("material air");
-                        td3.eq(j).removeClass("material sleep" ).addClass("material hunter");
+                        td3.eq(j).removeClass("material sleep" ).addClass("material movedhunter");
                         td3.eq(j).attr("title",parseInt(td.eq(j).attr("title"))+30);
                         td.eq(j).attr("title",0);
                    }else if(td.eq(j-1).attr("class" )=="material grass"){
@@ -186,8 +211,28 @@ var animal = {
                         td.eq(j).attr("title",0);
                    }else if(td3.eq(j).attr("class" )=="material grass"){
                         td.eq(j).removeClass("material hunter" ).addClass("material air");
-                        td3.eq(j).removeClass("material grass" ).addClass("material hunter");
+                        td3.eq(j).removeClass("material grass" ).addClass("material movedhunter");
                         td3.eq(j).attr("title",parseInt(td.eq(j).attr("title"))+10);
+                        td.eq(j).attr("title",0);
+                   }else if(td2.eq(j-1).attr("class" )=="material deadsleep"&&td2.eq(j).attr("class" )=="material air"){
+                        td.eq(j).removeClass("material hunter" ).addClass("material air");
+                        td2.eq(j).removeClass("material air" ).addClass("material hunter");
+                        td2.eq(j).attr("title",parseInt(td.eq(j).attr("title"))-1);
+                        td.eq(j).attr("title",0);
+                   }else if(td2.eq(j+1).attr("class" )=="material deadsleep"&&td2.eq(j).attr("class" )=="material air"){
+                        td.eq(j).removeClass("material hunter" ).addClass("material air");
+                        td2.eq(j).removeClass("material air" ).addClass("material hunter");
+                        td2.eq(j).attr("title",parseInt(td.eq(j).attr("title"))-1);
+                        td.eq(j).attr("title",0);
+                   }else if(td3.eq(j-1).attr("class" )=="material deadsleep"&&td3.eq(j).attr("class" )=="material air"){
+                        td.eq(j).removeClass("material hunter" ).addClass("material air");
+                        td3.eq(j).removeClass("material air" ).addClass("material movedhunter");
+                        td3.eq(j).attr("title",parseInt(td.eq(j).attr("title"))-1);
+                        td.eq(j).attr("title",0);
+                   }else if(td3.eq(j+1).attr("class" )=="material deadsleep"&&td3.eq(j).attr("class" )=="material air"){
+                        td.eq(j).removeClass("material hunter" ).addClass("material air");
+                        td3.eq(j).removeClass("material air" ).addClass("material movedhunter");
+                        td3.eq(j).attr("title",parseInt(td.eq(j).attr("title"))-1);
                         td.eq(j).attr("title",0);
                    }else if(td2.eq(j-1).attr("class" )=="material sleep"&&td2.eq(j).attr("class" )=="material air"){
                         td.eq(j).removeClass("material hunter" ).addClass("material air");
@@ -201,12 +246,12 @@ var animal = {
                         td.eq(j).attr("title",0);
                    }else if(td3.eq(j-1).attr("class" )=="material sleep"&&td3.eq(j).attr("class" )=="material air"){
                         td.eq(j).removeClass("material hunter" ).addClass("material air");
-                        td3.eq(j).removeClass("material air" ).addClass("material hunter");
+                        td3.eq(j).removeClass("material air" ).addClass("material movedhunter");
                         td3.eq(j).attr("title",parseInt(td.eq(j).attr("title"))-1);
                         td.eq(j).attr("title",0);
                    }else if(td3.eq(j+1).attr("class" )=="material sleep"&&td3.eq(j).attr("class" )=="material air"){
                         td.eq(j).removeClass("material hunter" ).addClass("material air");
-                        td3.eq(j).removeClass("material air" ).addClass("material hunter");
+                        td3.eq(j).removeClass("material air" ).addClass("material movedhunter");
                         td3.eq(j).attr("title",parseInt(td.eq(j).attr("title"))-1);
                         td.eq(j).attr("title",0);
                    }else if(td2.eq(j-1).attr("class" )=="material grass"&&td2.eq(j).attr("class" )=="material air"){
@@ -282,7 +327,19 @@ var animal = {
                 }
             }
         }
-        setTimeout("animal.find()", 300);
+        for(var i = 0 ;i<tr.length;i++){
+            var td = tr.eq(i).find("td");
+            for(var j = 0 ;j<td.length;j++){
+                var history_income_type = td.eq(j).attr("class");
+                if(history_income_type =="material movedsleep"){
+                     td.eq(j).removeClass("material movedsleep" ).addClass("material sleep");
+                }
+                if(history_income_type =="material movedhunter"){
+                     td.eq(j).removeClass("material movedhunter" ).addClass("material hunter");
+                }
+            }
+        }
+        setTimeout("animal.find()", 1000);
         
     },
     sleepaction:function(i,j){
