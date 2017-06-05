@@ -139,7 +139,7 @@ var animal = {
                     var td2 = tr.eq(i-1).find("td");
                     var td3 = tr.eq(i+1).find("td");
 
-                    if(td.eq(j).attr("title")==0){
+                    if(td.eq(j).attr("title")<=0){
                         td.eq(j).removeClass("material hunter").addClass("material air");
                         td.eq(j).attr("title",0);
                     }else if(td.eq(j).attr("title")>=animal.maxenergy){
@@ -277,9 +277,12 @@ var animal = {
                 if(history_income_type =="air material hunter"){
                      td.eq(j).removeClass("air material hunter" ).addClass(" material hunter");
                 }
+                if(history_income_type =="air material"){
+                     td.eq(j).removeClass("air material" ).addClass(" material air");
+                }
             }
         }
-        setTimeout("animal.find()", 500);
+        setTimeout("animal.find()", 300);
         
     },
     sleepaction:function(i,j){

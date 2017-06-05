@@ -17,10 +17,11 @@ var map = {
             for(var j in this.data[i]){
                 var td = document.createElement("td");
                 switch(this.data[i][j]){
-                    case " ":td.className=this.material.air.class;break;
-                    case "*":td.className=this.material.grass.class;break;
-                    case "#":td.className=this.material.wall.class;break;
-                    case "O":td.className=this.material.sleep.class;break;
+                    case " ":td.className=this.material.air.class;td.title=0;break;
+                    case "*":td.className=this.material.grass.class;td.title=5;break;
+                    case "#":td.className=this.material.wall.class;td.title=0;break;
+                    case "O":td.className=this.material.sleep.class;td.title=40;break;
+                    case "&":td.className=this.material.hunter.class;td.title=80;break;
                     default:break;
                 }
                 $(tr).append(td);
@@ -42,6 +43,9 @@ var map = {
         },
         "wall":{
             class:"material wall"
+        },
+        "hunter":{
+            class:"material hunter"
         }
     }
 }
