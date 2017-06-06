@@ -19,3 +19,16 @@
 .air {
     background-color:rgba(0, 0,0,0);
 }
+.deadsleep{
+    background-image: url(../../../image/material/deadsleep.png);
+}
+.deadhunter{
+    background-image: url(../../../image/material/deadman.png);
+}
+
+.movedsleep{
+     background-image: url(../../../image/material/sleep.png);
+}
+.movedhunter{
+     background-image: url(../../../image/material/man.png);
+}
