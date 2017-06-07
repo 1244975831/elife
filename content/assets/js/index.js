@@ -5,16 +5,12 @@ var world = {
     }
 }
 $(document).ready(function(){
+    
     layout.initPage();
     world.load();
     map.get();
     map.load();
-    // setInterval("animal.find()","1000");
-    // for(var i =0 ; i<8 ;i++){
     animal.find();
-        
-    // }
-    // animal.find();
 });
 function addsleep(){
     var addflag = 0;
@@ -58,4 +54,14 @@ function addhunter(){
 }
 function refresh(){
     location.reload() ;
+}
+function pause(){
+    $("#pause").attr("title",1);
+    document.getElementById("pause").style.display="none";
+    document.getElementById("start").style.display="block";
+}
+function start(){
+    $("#pause").attr("title",0);
+    document.getElementById("start").style.display="none";
+    document.getElementById("pause").style.display="block";
 }

@@ -7,7 +7,13 @@
     <link rel="stylesheet" type="text/css" href="./content/assets/css/material.css" />
 </head>
 <body>
-    <div id="page" class="page"></div>
+    <div id="page" class="page">
+        <button class="add" id="add" onclick="addsleep()">添加羊</button>
+        <button class="add" id="addhunter" onclick="addhunter()">添加捕食者</button>
+        <button class="add" id="refresh"  onclick="refresh()">重新开始</button>
+        <button class="add" id="pause"  onclick="pause()" title="0">暂停</button>
+        <button class="add" id="start"  onclick="start()" >开始</button>
+    </div>
 </body>
 <script type="text/javascript" src="./content/assets/js/jquery-3.2.1.min.js"></script>
 <script type="text/javascript" src="./content/assets/js/layout.js"></script>
